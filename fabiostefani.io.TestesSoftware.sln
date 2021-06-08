@@ -5,7 +5,7 @@ VisualStudioVersion = 16.0.30114.105
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{BAF11475-4CB1-4F5A-8E28-200BA0A4E726}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "fabiostefani.io.Cliente", "src\fabiostefani.io.Cliente\fabiostefani.io.Cliente.csproj", "{6B5D9420-6275-42CD-B536-3B813F4439BA}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "fabiostefani.io.Clientes", "src\fabiostefani.io.Clientes\fabiostefani.io.Clientes.csproj", "{6B5D9420-6275-42CD-B536-3B813F4439BA}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{3DC96BF7-D618-4446-8CA0-B3A47EFCABF0}"
 EndProject
