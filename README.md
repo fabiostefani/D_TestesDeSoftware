@@ -13,17 +13,25 @@ Como framework de testes, será utilizado o [XUnit.net](https://xunit.net/). É 
 
 ## Stack utilizada
 
-* [XUnit.net](https://xunit.net/)
+* [XUnit.net](https://xunit.net/): framework de testes
+* [Bogus](https://github.com/bchavez/Bogus): gerador de dados humanizados.
 
-### Comandos de CLI para o xUnit
 
-Criação de projeto de Testes
+## Comandos de CLI para o xUnit
+
+O comando para criar um projeto de Testes de Unidade com xUnit via cli é
 
 ```
 dotnet new xunit --name <NOME>
 ```
+E para rodar os testes, você pode executar para a solution ou para um projeto em específico.
+```
+dotnet test <sln>
+dotnet test <project de testes>
+```
 
-### Funcionalidades
+
+## Funcionalidades
 Possui algumas caracteristicas bem interessantes para o desenvolvimento do Teste de Unidade.
 * **FACT:** é o mais simples teste de Unidade. Baste somente decorar o método com *[FACT]* que ele já entende que é um teste de Unidade.
 ```
@@ -118,4 +126,36 @@ public class ClienteTesteValido
     }
 }
 ```
+* **ORDER:** utilizado para definir a ordem de execução dos testes. Mas convenhamos, se você tiver que definir ordem de execução em testes de unidade, provavelmente tem um problema de arquitetura com um alto acoplamento. Em alguns cenários até se faz necessário, por exemplo, em uma integração. Mas use com moderação.
+Para utilização, você deve preparar um Attribute que irá identificar a ordem de execução. Você pode verificar a definição desse atributo na classe *PriorityOrderer* no projeto de testes.
+E depois, você deve decorar o método de testes com a prioridade que você deseja executar
+```
+[Fact(DisplayName = "Teste 01"), TestPriority(2)]
+[Trait("Categoria", "Ordenacao Testes")]
+public void Teste01()
+{
+    // Arrange
+        
+    // Act
+    
+    // Assert 
+}
+```
+E decorar a classe de testes que deseja ter a ordenação com o atributo *TestCaseOrderer*. Deve ser informado o namespace da classe que define a ordem de execução dos testes *(fabiostefani.io.ClienteTests.Order.PriorityOrderer)* e o namespace do projeto de testes *(fabiostefani.io.ClienteTests)*.
+```
+[TestCaseOrderer("fabiostefani.io.ClienteTests.Order.PriorityOrderer", "fabiostefani.io.ClienteTests")]
+public class OrdemTestes
+{
+    
+}
+```
 
+
+### **Bogus**
+
+O Bogus é um gerador de dados humanizados. Muito poderoso. Ideal para a geração de dados aleatórios em seus testes. Isso fará você não ter testes viciados. No [Github](https://github.com/bchavez/Bogus) do projeto tem a documentação de como utilizar e suas funcionalidades.
+
+Para instalar o bogus, no projeto de testes.
+```
+dotnet add package bogus
+```
