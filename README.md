@@ -15,6 +15,8 @@ Como framework de testes, será utilizado o [XUnit.net](https://xunit.net/). É 
 
 * [XUnit.net](https://xunit.net/): framework de testes
 * [Bogus](https://github.com/bchavez/Bogus): gerador de dados humanizados.
+* [Moq](https://github.com/moq/moq4): utilizado para fazer o moq (fake) de objetos/interfaces.
+
 
 
 ## Comandos de CLI para o xUnit
@@ -158,4 +160,13 @@ O Bogus é um gerador de dados humanizados. Muito poderoso. Ideal para a geraç�
 Para instalar o bogus, no projeto de testes.
 ```
 dotnet add package bogus
+```
+
+### **Moq**
+
+O Moq é um instanciador Fake de objetos que você precisaria utilizar em construtores. Por exemplo, na instância da classe A, é injetado no construtor o service B. O Moq será responsável em gerar essa instância do service B. [Aqui](https://github.com/Moq/moq4/wiki/Quickstart) do projeto tem a documentação de como utilizar e suas funcionalidades.
+
+Para instalar o bogus, no projeto de testes.
+```
+dotnet add package moq
 ```
