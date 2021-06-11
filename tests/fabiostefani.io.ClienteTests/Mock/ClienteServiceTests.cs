@@ -1,3 +1,4 @@
+using System.Linq;
 using System.Threading;
 using fabiostefani.io.Clientes;
 using fabiostefani.io.ClienteTests.DadosHumanos;
@@ -41,14 +42,41 @@ namespace fabiostefani.io.ClienteTests.Mock
         [Trait("Categoria", "Cliente Service Mock Tests")]
         public void ClienteService_Adicionar_DeveFalharDevidoClienteInvalido()
         {
-            
+            // Arrange
+            var cliente = _clienteTestsBogus.GerarClienteInvalido();
+            var clienteRepo = new Mock<IClienteRepository>();
+            var mediatr = new Mock<IMediator>();
+
+            var clienteService = new ClienteService(clienteRepo.Object, mediatr.Object);
+
+            // Act
+            clienteService.Adicionar(cliente);
+
+            // Assert
+            Assert.False(cliente.EhValido());
+            clienteRepo.Verify(r => r.Adicionar(cliente),Times.Never);
+            mediatr.Verify(m=>m.Publish(It.IsAny<INotification>(),CancellationToken.None),Times.Never);
         }
 
         [Fact(DisplayName = "Obter Clientes Ativos")]
         [Trait("Categoria", "Cliente Service Mock Tests")]
         public void ClienteService_ObterTodosAtivos_DeveRetornarApenasClientesAtivos()
         {
-            
+            var clienteRepo = new Mock<IClienteRepository>();
+            var mediatr = new Mock<IMediator>();
+
+            var clienteService = new ClienteService(clienteRepo.Object, mediatr.Object);
+
+            clienteRepo.Setup(x => x.ObterTodos()).Returns(_clienteTestsBogus.ObterClientesVariados());
+
+            // Act
+            var clientes = clienteService.ObterTodosAtivos();
+
+            // Assert            
+             clienteRepo.Verify(r => r.ObterTodos(),Times.Once);
+            Assert.True(clientes.Any());
+            Assert.False(clientes.Count(x => !x.Ativo) > 0);
+            // mediatr.Verify(m=>m.Publish(It.IsAny<INotification>(),CancellationToken.None),Times.Never);
         }
     }
 }
