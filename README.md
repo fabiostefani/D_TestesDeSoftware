@@ -17,6 +17,7 @@ Como framework de testes, será utilizado o [XUnit.net](https://xunit.net/). É 
 * [Bogus](https://github.com/bchavez/Bogus): gerador de dados humanizados.
 * [Moq](https://github.com/moq/moq4): utilizado para fazer o moq (fake) de objetos/interfaces.
 * [AutoMock](https://github.com/moq/Moq.AutoMocker): utilizado para automatizar a injeção de dependências nos objetos a serem construídos.
+* [FluentAssertions](https://fluentassertions.com/): utilizado para escrever os asserts dos seus testes de forma mais fluida, gerando quase uma documentação deles.
 
 
 
@@ -165,7 +166,7 @@ dotnet add package bogus
 
 ### **Moq**
 
-O Moq é um instanciador Fake de objetos que você precisaria utilizar em construtores. Por exemplo, na instância da classe A, é injetado no construtor o service B. O Moq será responsável em gerar essa instância do service B. [Aqui](https://github.com/Moq/moq4/wiki/Quickstart) do projeto tem a documentação de como utilizar e suas funcionalidades.
+O Moq é um instanciador Fake de objetos que você precisaria utilizar em construtores. Por exemplo, na instância da classe A, é injetado no construtor o service B. O Moq será responsável em gerar essa instância do service B. [Aqui](https://github.com/Moq/moq4/wiki/Quickstart) tem a documentação do projeto de como utilizar e suas funcionalidades.
 
 Para instalar o moq, no projeto de testes.
 ```
@@ -174,9 +175,20 @@ dotnet add package moq
 
 ### **Automock**
 
-O Automock é um automatizador da injeção de dependências do objeto que estou gerando fake. Ele cria as interfaces sem eu estar me preocupando com elas. Só um detalhe, você deve informar para ele que deseja construir a classe concreta. [Aqui](https://github.com/moq/Moq.AutoMocker) do projeto tem a documentação de como utilizar e suas funcionalidades.
+O Automock é um automatizador da injeção de dependências do objeto que estou gerando fake. Ele cria as interfaces sem eu estar me preocupando com elas. Só um detalhe, você deve informar para ele que deseja construir a classe concreta. [Aqui](https://github.com/moq/Moq.AutoMocker) tem a documentação do projeto de como utilizar e suas funcionalidades.
 
 Para instalar o AutoMock, no projeto de testes.
 ```
 dotnet add package moq.automock
+```
+
+### **FluentAssertions**
+
+O FluentAssertions é uma extensão utilizada para deixar de forma fluída os asserts. Você vai escrevendo os asserts de uma forma muito legível. Não é obrigatório utilizar. 
+[Aqui](https://fluentassertions.com/introduction) tem a documentação do projeto e [aqui](https://github.com/fluentassertions/fluentassertions) o projeto no GitHub caso deseje conhecer um pouco mais o recurso.
+
+
+Para instalar o FluentAssertions, no projeto de testes.
+```
+dotnet add package fluentassertions
 ```

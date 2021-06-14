@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <PackageReference Include="bogus" Version="33.0.2" />
+    <PackageReference Include="fluentassertions" Version="5.10.3" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.7.1" />
     <PackageReference Include="moq" Version="4.16.1" />
     <PackageReference Include="moq.automock" Version="2.3.0" />
