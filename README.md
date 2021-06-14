@@ -16,6 +16,7 @@ Como framework de testes, será utilizado o [XUnit.net](https://xunit.net/). É 
 * [XUnit.net](https://xunit.net/): framework de testes
 * [Bogus](https://github.com/bchavez/Bogus): gerador de dados humanizados.
 * [Moq](https://github.com/moq/moq4): utilizado para fazer o moq (fake) de objetos/interfaces.
+* [AutoMock](https://github.com/moq/Moq.AutoMocker): utilizado para automatizar a injeção de dependências nos objetos a serem construídos.
 
 
 
@@ -166,7 +167,16 @@ dotnet add package bogus
 
 O Moq é um instanciador Fake de objetos que você precisaria utilizar em construtores. Por exemplo, na instância da classe A, é injetado no construtor o service B. O Moq será responsável em gerar essa instância do service B. [Aqui](https://github.com/Moq/moq4/wiki/Quickstart) do projeto tem a documentação de como utilizar e suas funcionalidades.
 
-Para instalar o bogus, no projeto de testes.
+Para instalar o moq, no projeto de testes.
 ```
 dotnet add package moq
+```
+
+### **Automock**
+
+O Automock é um automatizador da injeção de dependências do objeto que estou gerando fake. Ele cria as interfaces sem eu estar me preocupando com elas. Só um detalhe, você deve informar para ele que deseja construir a classe concreta. [Aqui](https://github.com/moq/Moq.AutoMocker) do projeto tem a documentação de como utilizar e suas funcionalidades.
+
+Para instalar o AutoMock, no projeto de testes.
+```
+dotnet add package moq.automock
 ```
