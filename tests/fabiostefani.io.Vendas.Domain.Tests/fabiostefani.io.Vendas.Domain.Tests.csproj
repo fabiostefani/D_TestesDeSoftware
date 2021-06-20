@@ -19,4 +19,9 @@
     </PackageReference>
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\fabiostefani.io.Vendas.Domain\fabiostefani.io.Vendas.Domain.csproj" />
+    <ProjectReference Include="..\..\src\fabiostefani.io.Core\fabiostefani.io.Core.csproj" />
+  </ItemGroup>
+
 </Project>
