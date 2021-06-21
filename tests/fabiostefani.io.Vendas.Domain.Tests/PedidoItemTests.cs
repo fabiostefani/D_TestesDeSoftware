@@ -8,7 +8,7 @@ namespace fabiostefani.io.Vendas.Domain.Tests
     public class PedidoItemTests
     {        
         [Fact(DisplayName = "Novo Item Pedido com Unidades abaixo do permitido")]
-        [Trait("CATEGORIA", "Item Pedido testes")]
+        [Trait("CATEGORIA", "Vendas - Pedido")]
         public void NovoItemPedido_UnidadesItensAbaixoDoPermitido_DeveRetornarException()
         {
             //ARRANGE //ACT //ASSERT            

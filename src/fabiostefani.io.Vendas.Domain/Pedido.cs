@@ -21,21 +21,63 @@ namespace fabiostefani.io.Vendas.Domain
         {
             _pedidoItens = new List<PedidoItem>();
         }
+
+        private bool PedidoItemExistente(PedidoItem pedidoItem)
+        {
+            return _pedidoItens.Any(x => x.ProdutoId == pedidoItem.ProdutoId);
+        }
+
+        private void ValidarPedidoItemInexistente(PedidoItem pedidoItem)
+        {
+            if (!PedidoItemExistente(pedidoItem)) 
+                throw new DomainException($"O item não existe no pedido.");   
+        }
+
+        private void ValidarQuantidadeItemPermitida(PedidoItem pedidoItem)
+        {
+            var quantidadeItens = pedidoItem.Quantidade;
+            if (PedidoItemExistente(pedidoItem))
+            {                
+                var itemExistente = _pedidoItens.FirstOrDefault(x => x.ProdutoId == pedidoItem.ProdutoId);
+                quantidadeItens += itemExistente.Quantidade;                
+            }
+            if (quantidadeItens > MAX_UNIDADES_ITEM) throw new DomainException($"Máximo de {MAX_UNIDADES_ITEM} unidades por produto.");            
+        }
+
         public void AdicionarItem(PedidoItem pedidoItem)
         {
-            if (pedidoItem.Quantidade > MAX_UNIDADES_ITEM)            
-                throw new DomainException($"Máximo de {MAX_UNIDADES_ITEM} unidades por produto.");            
+            ValidarQuantidadeItemPermitida(pedidoItem);
 
-            if (_pedidoItens.Any(x=>x.ProdutoId == pedidoItem.ProdutoId))
-            {
+            if (PedidoItemExistente(pedidoItem))
+            {                
                 var itemExistente = _pedidoItens.FirstOrDefault(x => x.ProdutoId == pedidoItem.ProdutoId);
-                itemExistente.AtualizarUnidades(pedidoItem.Quantidade);
+               
+                itemExistente.AdicionarUnidades(pedidoItem.Quantidade);
                 pedidoItem = itemExistente;
+
                 _pedidoItens.Remove(itemExistente);
             }
 
-
             _pedidoItens.Add(pedidoItem);
+            CalcularValorPedido();
+        }
+
+        public void AtualizarItem(PedidoItem pedidoItem)
+        {
+            ValidarPedidoItemInexistente(pedidoItem);
+            ValidarQuantidadeItemPermitida(pedidoItem);
+
+            var itemExistente = PedidoItens.FirstOrDefault(x => x.ProdutoId == pedidoItem.ProdutoId);
+            _pedidoItens.Remove(itemExistente);
+            _pedidoItens.Add(pedidoItem);
+
+            CalcularValorPedido();
+        }
+
+        public void RemoverItem(PedidoItem pedidoItem)
+        {
+            ValidarPedidoItemInexistente(pedidoItem);
+            _pedidoItens.Remove(pedidoItem);
             CalcularValorPedido();
         }
 

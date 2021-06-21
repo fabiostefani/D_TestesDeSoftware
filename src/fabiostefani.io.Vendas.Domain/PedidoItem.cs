@@ -14,14 +14,14 @@ namespace fabiostefani.io.Vendas.Domain
         {
             if (quantidade < Pedido.MIN_UNIDADES_ITEM)            
                 throw new DomainException($"Mínimo de {Pedido.MIN_UNIDADES_ITEM} unidades por produto.");            
-                
+
             ProdutoId = produtoId;
             ProdutoNome = produtoNome;
             Quantidade = quantidade;
             ValorUnitario = valorUnitario;
         }
 
-        public void AtualizarUnidades(int unidades)
+        public void AdicionarUnidades(int unidades)
         {
             Quantidade += unidades;
         }
