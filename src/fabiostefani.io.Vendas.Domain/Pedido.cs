@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using fabiostefani.io.Core.DomainObjects;
+using fabiostefani.io.Vendas.Domain.Vouchers;
+using FluentValidation.Results;
 
 namespace fabiostefani.io.Vendas.Domain
 {
@@ -11,8 +13,11 @@ namespace fabiostefani.io.Vendas.Domain
         public static int MIN_UNIDADES_ITEM => 1;
         
         public decimal ValorTotal { get; private set; }
+        public decimal Desconto { get; private set; }
         public PedidoStatus PedidoStatus { get; private set; }
         public Guid ClienteId { get; private set; }
+        public bool VoucherUtilizado { get; private set; }
+        public Voucher Voucher { get; private set; }
 
         private readonly List<PedidoItem> _pedidoItens;
         public IReadOnlyCollection<PedidoItem> PedidoItens => _pedidoItens;
@@ -84,11 +89,49 @@ namespace fabiostefani.io.Vendas.Domain
         private void CalcularValorPedido()
         {
             ValorTotal = PedidoItens.Sum(x => x.CalcularValor());
+            CalcularValorTotalDesconto();
         }
 
         public void TornarRascunho()
         {
             PedidoStatus = PedidoStatus.Rascunho;
+        }
+
+        public ValidationResult AplicarVoucher(Voucher voucher)
+        {
+            var result = voucher.ValidarSeAplicavel();
+            if (!result.IsValid) return result;
+
+            Voucher = voucher;
+            VoucherUtilizado = true;
+
+            CalcularValorTotalDesconto();
+
+            return result;
+        }
+
+        private void CalcularValorTotalDesconto()
+        {
+            if (!VoucherUtilizado) return;
+            decimal desconto = 0;
+            var valor = ValorTotal;
+            if (Voucher.TipoDescontoVoucher == TipoDescontoVoucher.Valor)
+            {
+                if (Voucher.ValorDesconto.HasValue)   
+                {
+                    desconto = Voucher.ValorDesconto.Value;                    
+                }                                  
+            }
+            else
+            {
+                if (Voucher.PercentualDesconto.HasValue)
+                {
+                    desconto = (ValorTotal * Voucher.PercentualDesconto.Value) / 100;                                        
+                }                    
+            }
+            valor -= desconto;
+            ValorTotal = valor < 0 ? 0 : valor;            
+            Desconto = desconto;
         }
 
         public static class PedidoFactory
