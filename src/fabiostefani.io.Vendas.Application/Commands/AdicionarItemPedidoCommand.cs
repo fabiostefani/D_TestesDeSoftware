@@ -1,10 +1,11 @@
 using System;
+using fabiostefani.io.Core.Messages;
 using fabiostefani.io.Vendas.Domain;
 using FluentValidation;
 
 namespace fabiostefani.io.Vendas.Application.Commands
 {
-    public class AdicionarItemPedidoCommand
+    public class AdicionarItemPedidoCommand : Command
     {
         public Guid ClienteId { get; set; }
         public Guid ProdutoId { get; set; }
@@ -21,9 +22,10 @@ namespace fabiostefani.io.Vendas.Application.Commands
             ValorUnitario = valorUnitario;
         }
 
-        public bool EhValido()
+        public override bool EhValido()
         {
-            return new AdicionarItemPedidoValidation().Validate(this).IsValid;
+            ValidationResult = new AdicionarItemPedidoValidation().Validate(this);
+            return ValidationResult.IsValid;
         }
 
     }
