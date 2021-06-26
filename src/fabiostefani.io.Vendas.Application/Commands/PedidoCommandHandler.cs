@@ -84,8 +84,7 @@ namespace fabiostefani.io.Vendas.Application.Commands
             //     _pedidoRepository.Atualizar(pedido);
             // }
 
-            // pedido.AdicionarEvento(new PedidoItemAdicionadoEvent(pedido.ClienteId, pedido.Id, message.ProdutoId, 
-            //     message.Nome, message.ValorUnitario, message.Quantidade));
+            
 
             // return await _pedidoRepository.UnitOfWork.Commit();
             var pedidoItem = new PedidoItem(message.ProdutoId, message.Nome, message.Quantidade, message.ValorUnitario);
@@ -94,9 +93,8 @@ namespace fabiostefani.io.Vendas.Application.Commands
             
             _pedidoRepository.Adicionar(pedido);
 
-            await _mediator.Publish(new PedidoItemAdicionadoEvent(pedido.ClienteId, pedido.Id, message.ProdutoId, 
-                 message.Nome, message.ValorUnitario, message.Quantidade), cancellationToken);
-            return true;
+            pedido.AdicionarEvento(new PedidoItemAdicionadoEvent(pedido.ClienteId, pedido.Id, message.ProdutoId, message.Nome, message.ValorUnitario, message.Quantidade));
+            return await _pedidoRepository.UnitOfWork.Commit();
         }
 
     }

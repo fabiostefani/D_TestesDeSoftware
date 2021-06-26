@@ -37,7 +37,7 @@ namespace fabiostefani.io.Vendas.Application.Tests.Pedidos
                  Guid.NewGuid(), "Produto Teste", 2, 100);
             var mocker = new AutoMocker();
             var pedidoHandler = mocker.CreateInstance<PedidoCommandHandler>();
-            // _mocker.GetMock<IPedidoRepository>().Setup(r => r.UnitOfWork.Commit()).Returns(Task.FromResult(true));
+            mocker.GetMock<IPedidoRepository>().Setup(r => r.UnitOfWork.Commit()).Returns(Task.FromResult(true));
 
             // Act
             //var result = await _pedidoHandler.Handle(pedidoCommand, CancellationToken.None);
@@ -46,9 +46,10 @@ namespace fabiostefani.io.Vendas.Application.Tests.Pedidos
             // Assert
             Assert.True(result);
             mocker.GetMock<IPedidoRepository>().Verify(r=>r.Adicionar(It.IsAny<Pedido>()), Times.Once);
-            mocker.GetMock<IMediator>().Verify(r => r.Publish(It.IsAny<INotification>(), CancellationToken.None), Times.Once);
+            mocker.GetMock<IPedidoRepository>().Verify(r => r.UnitOfWork.Commit(), Times.Once);
+            //mocker.GetMock<IMediator>().Verify(r => r.Publish(It.IsAny<INotification>(), CancellationToken.None), Times.Once);
             // _mocker.GetMock<IPedidoRepository>().Verify(r=>r.Adicionar(It.IsAny<Pedido>()), Times.Once);
-            // _mocker.GetMock<IPedidoRepository>().Verify(r => r.UnitOfWork.Commit(), Times.Once);
+            
             // //mocker.GetMock<IMediator>().Verify(r => r.Publish(It.IsAny<INotification>(), CancellationToken.None), Times.Once);
         }
     }
