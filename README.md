@@ -192,3 +192,23 @@ Para instalar o FluentAssertions, no projeto de testes.
 ```
 dotnet add package fluentassertions
 ```
+
+### **Coverlet**
+
+O [Coverlet](https://github.com/coverlet-coverage/coverlet) é utilizado para se calcular a cobertura de testes do seu projeto. A cobertura de testes indica o alcance da execução dos testes em um projeto. Se metade do código existente for executado durante o processamento, teremos uma cobertura de 50%. Testar absolutamente tudo e chegar a 100% nem sempre é possível. 
+Quando se instala o xUnit, já é adicionado essa package ao projeto.
+Para se executar a cobertura, deve ser executado o comando no projeto que desejo realizar os testes.
+
+```
+dotnet test --collect:"XPlat Code Coverage
+```
+Será gerado um arquivo XML na pasta TestResults com os dados da cobertura de testes. 
+Com base nesse XML, é possível gerar um relatório em HTML através do [ReportGenerator](https://github.com/danielpalme/ReportGenerator) com a apresentação dos resultados. Para o funcionamento, devemos instalar a ferramenta
+```
+dotnet tool install --global dotnet-reportgenerator-globaltool
+```
+Após isso, deve ser acessado o diretório que foi gerado o XML com o resultado do Coverlet e executar o comando
+```
+reportgenerator "-reports:coverage.cobertura.xml" "-targetdir:coveragereport" -reporttypes:Html
+```
+Teremos a geração do diretório coveragereport contendo o site estático em HTML como resultado. Para visualizar, deve ser aberto o index.html.
