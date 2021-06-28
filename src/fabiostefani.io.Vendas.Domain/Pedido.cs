@@ -27,7 +27,7 @@ namespace fabiostefani.io.Vendas.Domain
             _pedidoItens = new List<PedidoItem>();
         }
 
-        private bool PedidoItemExistente(PedidoItem pedidoItem)
+        public bool PedidoItemExistente(PedidoItem pedidoItem)
         {
             return _pedidoItens.Any(x => x.ProdutoId == pedidoItem.ProdutoId);
         }
