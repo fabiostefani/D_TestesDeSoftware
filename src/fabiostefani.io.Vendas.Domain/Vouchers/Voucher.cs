@@ -1,9 +1,11 @@
 using System;
+using System.Collections.Generic;
+using fabiostefani.io.Core.DomainObjects;
 using FluentValidation.Results;
 
 namespace fabiostefani.io.Vendas.Domain.Vouchers
 {
-    public class Voucher
+    public class Voucher : Entity
     {
         public string Codigo { get; private set; }
         public TipoDescontoVoucher TipoDescontoVoucher { get; private set; }
@@ -13,6 +15,8 @@ namespace fabiostefani.io.Vendas.Domain.Vouchers
         public DateTime DataValidade { get; private set; }
         public bool Ativo { get; private set; }
         public bool Utilizado { get; private set; }
+
+        public ICollection<Pedido> Pedidos { get; set; }
 
         public Voucher(string codigo, TipoDescontoVoucher tipoDescontoVoucher, decimal? valorDesconto, decimal? percentualDesconto, int quantidade, DateTime dataValidade, bool ativo, bool utilizado)
         {

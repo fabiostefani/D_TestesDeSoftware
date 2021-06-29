@@ -7,6 +7,8 @@ Alguns tópicos abordados, dentre outros:
 * Como testar
 * Tipos de testes
 * Frameworks (MSTeste, nUnit, xUnit)
+* TDD
+* Testes de Integração
 * Etc
 
 Como framework de testes, será utilizado o [XUnit.net](https://xunit.net/). É um framework free, open-source, baseado no nUnit e que também é utilizado pela própria Microsoft para testes do ASP.NET Core. 👌
@@ -212,3 +214,7 @@ Após isso, deve ser acessado o diretório que foi gerado o XML com o resultado 
 reportgenerator "-reports:coverage.cobertura.xml" "-targetdir:coveragereport" -reporttypes:Html
 ```
 Teremos a geração do diretório coveragereport contendo o site estático em HTML como resultado. Para visualizar, deve ser aberto o index.html.
+
+### **Testes de Integração**
+
+Serve para garantir que a aplicação está realizando a integração entre as camadas do sistema e garantir que as operações estão sendo realizadas com sucesso. Deve iniciar a aplicação e simular as operações como se fosse o usuário executando.
