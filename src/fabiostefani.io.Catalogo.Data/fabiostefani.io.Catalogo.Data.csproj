@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <ItemGroup>
+    <ProjectReference Include="..\fabiostefani.io.Core\fabiostefani.io.Core.csproj" />
+    <ProjectReference Include="..\fabiostefani.io.Catalogo.Domain\fabiostefani.io.Catalogo.Domain.csproj" />
+  </ItemGroup>
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+</Project>

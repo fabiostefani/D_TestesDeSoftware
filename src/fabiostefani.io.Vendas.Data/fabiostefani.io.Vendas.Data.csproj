@@ -12,5 +12,6 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\fabiostefani.io.Core\fabiostefani.io.Core.csproj" />
+    <ProjectReference Include="..\fabiostefani.io.Vendas.Domain\fabiostefani.io.Vendas.Domain.csproj" />
   </ItemGroup>
 </Project>
