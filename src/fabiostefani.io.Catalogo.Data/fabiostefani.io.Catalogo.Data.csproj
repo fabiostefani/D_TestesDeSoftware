@@ -1,6 +1,13 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="5.0.5"/>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="5.0.5"/>    
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="5.0.5"/>
+    <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="5.0.5.1"/>
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\fabiostefani.io.Core\fabiostefani.io.Core.csproj" />
     <ProjectReference Include="..\fabiostefani.io.Catalogo.Domain\fabiostefani.io.Catalogo.Domain.csproj" />
   </ItemGroup>
