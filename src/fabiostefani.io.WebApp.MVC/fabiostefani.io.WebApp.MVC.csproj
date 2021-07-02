@@ -1,0 +1,37 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+    <UserSecretsId>aspnet-fabiostefani.io.WebApp.MVC-E5F7EC90-3D68-418D-B80D-C8396AEEFA2E</UserSecretsId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Update="app.db" CopyToOutputDirectory="PreserveNewest" ExcludeFromSingleFile="true" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="5.0.5" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="5.0.5" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="5.0.5" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="5.0.5" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="5.0.5">
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="8.1.1" />
+    <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="9.0.0" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="5.0.2" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGenerators.Mvc" Version="5.0.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\fabiostefani.io.Core\fabiostefani.io.Core.csproj" />
+    <ProjectReference Include="..\fabiostefani.io.Catalogo.Application\fabiostefani.io.Catalogo.Application.csproj" />
+    <ProjectReference Include="..\fabiostefani.io.Catalogo.Domain\fabiostefani.io.Catalogo.Domain.csproj" />
+    <ProjectReference Include="..\fabiostefani.io.Catalogo.Data\fabiostefani.io.Catalogo.Data.csproj" />
+    <ProjectReference Include="..\fabiostefani.io.Vendas.Application\fabiostefani.io.Vendas.Application.csproj" />
+    <ProjectReference Include="..\fabiostefani.io.Vendas.Data\fabiostefani.io.Vendas.Data.csproj" />
+    <ProjectReference Include="..\fabiostefani.io.Vendas.Domain\fabiostefani.io.Vendas.Domain.csproj" />
+  </ItemGroup>
+
+</Project>
