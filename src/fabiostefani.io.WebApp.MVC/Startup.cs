@@ -17,6 +17,7 @@ using fabiostefani.io.Vendas.Data;
 using fabiostefani.io.Catalogo.Application.AutoMapper;
 using Microsoft.AspNetCore.Http;
 using MediatR;
+using fabiostefani.io.WebApp.MVC.Setup;
 
 namespace fabiostefani.io.WebApp.MVC
 {
@@ -60,7 +61,7 @@ namespace fabiostefani.io.WebApp.MVC
 
             services.AddAutoMapper(typeof(DomainToViewModelMappingProfile), typeof(ViewModelToDomainMappingProfile));
             services.AddMediatR(typeof(Startup));
-            // services.RegisterServices();
+            services.RegisterServices();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
