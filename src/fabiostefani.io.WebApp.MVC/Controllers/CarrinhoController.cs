@@ -11,7 +11,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace fabiostefani.io.WebApp.MVC.Controllers
 {
-    [Authorize]
+    // [Authorize]
     public class CarrinhoController : ControllerBase
     {
         private readonly IProdutoAppService _produtoAppService;

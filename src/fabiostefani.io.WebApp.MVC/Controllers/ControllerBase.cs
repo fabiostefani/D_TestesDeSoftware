@@ -15,7 +15,7 @@ namespace fabiostefani.io.WebApp.MVC.Controllers
         private readonly DomainNotificationHandler _notifications;
         private readonly IMediator _mediatorHandler;
 
-        protected Guid ClienteId;
+        protected Guid ClienteId = Guid.Parse("4885e451-b0e4-4490-b959-04fabc806d32");
 
         protected ControllerBase(INotificationHandler<DomainNotification> notifications,
                                  IMediator mediatorHandler, 

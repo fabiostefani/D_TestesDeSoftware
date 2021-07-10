@@ -18,6 +18,7 @@ using fabiostefani.io.Catalogo.Application.AutoMapper;
 using Microsoft.AspNetCore.Http;
 using MediatR;
 using fabiostefani.io.WebApp.MVC.Setup;
+using Microsoft.AspNetCore.Mvc;
 
 namespace fabiostefani.io.WebApp.MVC
 {
@@ -51,11 +52,43 @@ namespace fabiostefani.io.WebApp.MVC
             services.AddDbContext<VendasContext>(options =>
                 options.UseNpgsql(
                     Configuration.GetConnectionString("DefaultConnection")));
+
+            services.AddDefaultIdentity<IdentityUser>()
+               //.AddDefaultUI(UIFramework.Bootstrap4)
+               .AddEntityFrameworkStores<ApplicationDbContext>();
+
+            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
+            services.AddHttpContextAccessor();
+
+            // services.AddSwaggerGen(c =>
+            // {
+            //    var security = new Dictionary<string, IEnumerable<string>>
+            //    {
+            //        {"Bearer", new string[] { }}
+            //    };
+
+            //    c.AddSecurityDefinition("Bearer", new ApiKeyScheme
+            //    {
+            //        Description = "Insira o token JWT desta maneira: Bearer {seu token}",
+            //        Name = "Authorization",
+            //        In = "header",
+            //        Type = "apiKey"
+            //    });
+
+            //    c.AddSecurityRequirement(security);
+
+            //    c.SwaggerDoc("v1", new Info
+            //    {
+            //        Version = "v1",
+            //        Title = "desenvolvedor.io API",
+            //        Description = "desenvolvedor.io  API",
+            //        TermsOfService = "Nenhum",
+            //        Contact = new Contact { Name = "desenvolvedor.io", Email = "email@desenvolvedor.io", Url = "http://desenvolvedor.io" },
+            //        License = new License { Name = "MIT", Url = "http://desenvolvedor.io/licensa" }
+            //    });
+            // });
             
             services.AddDatabaseDeveloperPageExceptionFilter();
-
-            services.AddDefaultIdentity<IdentityUser>(/*options => options.SignIn.RequireConfirmedAccount = true*/)
-               .AddEntityFrameworkStores<ApplicationDbContext>();
 
             services.AddControllersWithViews();
 
@@ -80,13 +113,19 @@ namespace fabiostefani.io.WebApp.MVC
             }
             app.UseHttpsRedirection();
             app.UseStaticFiles();
+            app.UseCookiePolicy();
 
             app.UseRouting();
 
             app.UseAuthentication();
-            // app.UseAuthorization();
+            app.UseAuthorization();
 
-            app.UseCookiePolicy();
+
+            // app.UseSwagger();
+            // app.UseSwaggerUI(s =>
+            // {
+            //    s.SwaggerEndpoint("/swagger/v1/swagger.json", "desenvolvedor.io API v1.0");
+            // });    
 
             app.UseEndpoints(endpoints =>
             {

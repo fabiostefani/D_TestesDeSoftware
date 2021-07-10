@@ -18,7 +18,7 @@ using Microsoft.IdentityModel.Tokens;
 
 namespace fabiostefani.io.WebApp.MVC.Controllers
 {
-    [Authorize]
+    // [Authorize]
     public class CarrinhoControllerApi : ControllerBase
     {
         private readonly IProdutoAppService _produtoAppService;
