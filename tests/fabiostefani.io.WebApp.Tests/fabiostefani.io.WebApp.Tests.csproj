@@ -7,6 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="bogus" Version="33.0.2" />
     <PackageReference Include="microsoft.aspnetcore.app" Version="2.2.8" />
     <PackageReference Include="microsoft.aspnetcore.mvc.testing" Version="5.0.7" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.9.4" />
@@ -24,6 +25,7 @@
   <ItemGroup>
     <ProjectReference Include="..\..\src\fabiostefani.io.Core\fabiostefani.io.Core.csproj" />
     <ProjectReference Include="..\..\src\fabiostefani.io.WebApp.MVC\fabiostefani.io.WebApp.MVC.csproj" />
+    <ProjectReference Include="..\fabiostefani.io.ClienteTests\fabiostefani.io.ClienteTests.csproj" />
   </ItemGroup>
 
 </Project>

@@ -4,6 +4,7 @@ using System.Net.Http;
 using System.Net.Http.Json;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using Bogus;
 using fabiostefani.io.WebApp.MVC;
 using fabiostefani.io.WebApp.MVC.Models;
 using Microsoft.AspNetCore.Mvc.Testing;
@@ -21,8 +22,8 @@ namespace fabiostefani.io.WebApp.Tests.Config
     {
         // public string AntiForgeryFieldName = "__RequestVerificationToken";
 
-        // public string UsuarioEmail;
-        // public string UsuarioSenha;
+        public string UsuarioEmail;
+        public string UsuarioSenha;
 
         // public string UsuarioToken;
 
@@ -43,12 +44,12 @@ namespace fabiostefani.io.WebApp.Tests.Config
             Client = Factory.CreateClient(clientOptions);
         }
 
-        // public void GerarUserSenha()
-        // {
-        //     var faker = new Faker("pt_BR");
-        //     UsuarioEmail = faker.Internet.Email().ToLower();
-        //     UsuarioSenha = faker.Internet.Password(8, false, "", "@1Ab_");
-        // }
+        public void GerarUserSenha()
+        {
+            var faker = new Faker("pt_BR");
+            UsuarioEmail = faker.Internet.Email().ToLower();
+            UsuarioSenha = faker.Internet.Password(8, false, "", "@1Ab_");
+        }
 
         // public async Task RealizarLoginApi()
         // {
