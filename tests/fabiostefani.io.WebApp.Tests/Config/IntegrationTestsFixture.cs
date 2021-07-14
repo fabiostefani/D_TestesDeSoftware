@@ -20,7 +20,7 @@ namespace fabiostefani.io.WebApp.Tests.Config
 
     public class IntegrationTestsFixture<TStartup> : IDisposable where TStartup : class
     {
-        // public string AntiForgeryFieldName = "__RequestVerificationToken";
+        public string AntiForgeryFieldName = "__RequestVerificationToken";
 
         public string UsuarioEmail;
         public string UsuarioSenha;
@@ -89,18 +89,18 @@ namespace fabiostefani.io.WebApp.Tests.Config
         //     await Client.SendAsync(postRequest);
         // }
 
-        // public string ObterAntiForgeryToken(string htmlBody)
-        // {
-        //     var requestVerificationTokenMatch =
-        //         Regex.Match(htmlBody, $@"\<input name=""{AntiForgeryFieldName}"" type=""hidden"" value=""([^""]+)"" \/\>");
+        public string ObterAntiForgeryToken(string htmlBody)
+        {
+            var requestVerificationTokenMatch =
+                Regex.Match(htmlBody, $@"\<input name=""{AntiForgeryFieldName}"" type=""hidden"" value=""([^""]+)"" \/\>");
 
-        //     if (requestVerificationTokenMatch.Success)
-        //     {
-        //         return requestVerificationTokenMatch.Groups[1].Captures[0].Value;
-        //     }
+            if (requestVerificationTokenMatch.Success)
+            {
+                return requestVerificationTokenMatch.Groups[1].Captures[0].Value;
+            }
 
-        //     throw new ArgumentException($"Anti forgery token '{AntiForgeryFieldName}' não encontrado no HTML", nameof(htmlBody));
-        // }
+            throw new ArgumentException($"Anti forgery token '{AntiForgeryFieldName}' não encontrado no HTML", nameof(htmlBody));
+        }
 
         public void Dispose()
         {

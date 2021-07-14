@@ -27,13 +27,13 @@ namespace fabiostefani.io.WebApp.Tests
             var initialResponse = await _testsFixture.Client.GetAsync("/Identity/Account/Register");
             initialResponse.EnsureSuccessStatusCode();
 
-            // var antiForgeryToken = _testsFixture.ObterAntiForgeryToken(await initialResponse.Content.ReadAsStringAsync());
+            var antiForgeryToken = _testsFixture.ObterAntiForgeryToken(await initialResponse.Content.ReadAsStringAsync());
 
             _testsFixture.GerarUserSenha();
 
             var formData = new Dictionary<string, string>
             {
-            //     { _testsFixture.AntiForgeryFieldName, antiForgeryToken },
+                { _testsFixture.AntiForgeryFieldName, antiForgeryToken },
                 {"Input.Email", _testsFixture.UsuarioEmail },
                 {"Input.Password", _testsFixture.UsuarioSenha },
                 {"Input.ConfirmPassword", _testsFixture.UsuarioSenha }
