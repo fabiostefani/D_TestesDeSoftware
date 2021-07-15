@@ -34,10 +34,10 @@ namespace fabiostefani.io.WebApp.Tests.Config
         {
             var clientOptions = new WebApplicationFactoryClientOptions
             {
-                // AllowAutoRedirect = true,
-                // BaseAddress = new Uri("http://localhost"),
-                // HandleCookies = true,
-                // MaxAutomaticRedirections = 7
+                AllowAutoRedirect = true,
+                BaseAddress = new Uri("http://localhost"),
+                HandleCookies = true,
+                MaxAutomaticRedirections = 7
             };
 
             Factory = new LojaAppFactory<TStartup>();
@@ -67,27 +67,27 @@ namespace fabiostefani.io.WebApp.Tests.Config
         //     UsuarioToken = await response.Content.ReadAsStringAsync();
         // }
 
-        // public async Task RealizarLoginWeb()
-        // {
-        //     var initialResponse = await Client.GetAsync("/Identity/Account/Login");
-        //     initialResponse.EnsureSuccessStatusCode();
+        public async Task RealizarLoginWeb()
+        {
+            var initialResponse = await Client.GetAsync("/Identity/Account/Login");
+            initialResponse.EnsureSuccessStatusCode();
 
-        //     var antiForgeryToken = ObterAntiForgeryToken(await initialResponse.Content.ReadAsStringAsync());
+            var antiForgeryToken = ObterAntiForgeryToken(await initialResponse.Content.ReadAsStringAsync());
 
-        //     var formData = new Dictionary<string, string>
-        //     {
-        //         {AntiForgeryFieldName, antiForgeryToken},
-        //         {"Input.Email", "teste@teste.com"},
-        //         {"Input.Password", "Teste@123"}
-        //     };
+            var formData = new Dictionary<string, string>
+            {
+                {AntiForgeryFieldName, antiForgeryToken},
+                {"Input.Email", "teste@teste.com"},
+                {"Input.Password", "Teste@123"}
+            };
 
-        //     var postRequest = new HttpRequestMessage(HttpMethod.Post, "/Identity/Account/Login")
-        //     {
-        //         Content = new FormUrlEncodedContent(formData)
-        //     };
+            var postRequest = new HttpRequestMessage(HttpMethod.Post, "/Identity/Account/Login")
+            {
+                Content = new FormUrlEncodedContent(formData)
+            };
 
-        //     await Client.SendAsync(postRequest);
-        // }
+            await Client.SendAsync(postRequest);
+        }
 
         public string ObterAntiForgeryToken(string htmlBody)
         {
