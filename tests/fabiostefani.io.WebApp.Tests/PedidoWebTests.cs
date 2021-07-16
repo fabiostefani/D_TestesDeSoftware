@@ -37,7 +37,7 @@ namespace fabiostefani.io.WebApp.Tests
                 {"quantidade", quantidade.ToString()}
             };
 
-            // await _testsFixture.RealizarLoginWeb();
+            await _testsFixture.RealizarLoginWeb();
 
             var postRequest = new HttpRequestMessage(HttpMethod.Post, "/meu-carrinho")
             {

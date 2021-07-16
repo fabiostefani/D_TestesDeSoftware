@@ -19,6 +19,8 @@ using Microsoft.AspNetCore.Http;
 using MediatR;
 using fabiostefani.io.WebApp.MVC.Setup;
 using Microsoft.AspNetCore.Mvc;
+using Swashbuckle.AspNetCore.Swagger;
+using Microsoft.OpenApi.Models;
 
 namespace fabiostefani.io.WebApp.MVC
 {
@@ -60,33 +62,36 @@ namespace fabiostefani.io.WebApp.MVC
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
             services.AddHttpContextAccessor();
 
-            // services.AddSwaggerGen(c =>
-            // {
-            //    var security = new Dictionary<string, IEnumerable<string>>
-            //    {
-            //        {"Bearer", new string[] { }}
-            //    };
+            services.AddSwaggerGen(c =>
+            {
+               var security = new Dictionary<string, IEnumerable<string>>
+               {
+                   {"Bearer", new string[] { }}
+               };
 
-            //    c.AddSecurityDefinition("Bearer", new ApiKeyScheme
-            //    {
-            //        Description = "Insira o token JWT desta maneira: Bearer {seu token}",
-            //        Name = "Authorization",
-            //        In = "header",
-            //        Type = "apiKey"
-            //    });
+               c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+               {
+                   Description = "Insira o token JWT desta maneira: Bearer {seu token}",
+                   Name = "Authorization",
+                   In = ParameterLocation.Header,
+                   Type = SecuritySchemeType.ApiKey
+               });
 
-            //    c.AddSecurityRequirement(security);
+               c.AddSecurityRequirement(new OpenApiSecurityRequirement()
+               {
 
-            //    c.SwaggerDoc("v1", new Info
-            //    {
-            //        Version = "v1",
-            //        Title = "desenvolvedor.io API",
-            //        Description = "desenvolvedor.io  API",
-            //        TermsOfService = "Nenhum",
-            //        Contact = new Contact { Name = "desenvolvedor.io", Email = "email@desenvolvedor.io", Url = "http://desenvolvedor.io" },
-            //        License = new License { Name = "MIT", Url = "http://desenvolvedor.io/licensa" }
-            //    });
-            // });
+               } );
+
+               c.SwaggerDoc("v1", new OpenApiInfo
+               {
+                   Version = "v1",
+                   Title = "desenvolvedor.io API",
+                   Description = "desenvolvedor.io  API",
+                   //TermsOfService =  "Nenhum",
+                   Contact = new OpenApiContact{ Name = "desenvolvedor.io", Email = "email@desenvolvedor.io", Url = new Uri("http://desenvolvedor.io") },
+                   License = new OpenApiLicense { Name = "MIT", Url = new Uri("http://desenvolvedor.io/licensa") }
+               });
+            });
             
             services.AddDatabaseDeveloperPageExceptionFilter();
 
@@ -121,11 +126,11 @@ namespace fabiostefani.io.WebApp.MVC
             app.UseAuthorization();
 
 
-            // app.UseSwagger();
-            // app.UseSwaggerUI(s =>
-            // {
-            //    s.SwaggerEndpoint("/swagger/v1/swagger.json", "desenvolvedor.io API v1.0");
-            // });    
+            app.UseSwagger();
+            app.UseSwaggerUI(s =>
+            {
+               s.SwaggerEndpoint("/swagger/v1/swagger.json", "desenvolvedor.io API v1.0");
+            });    
 
             app.UseEndpoints(endpoints =>
             {
